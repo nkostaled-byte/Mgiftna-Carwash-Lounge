@@ -1,0 +1,6 @@
+{
+  "name": "Mgiftna Carwash & Lounge",
+  "description": "Premium mobile-first Progressive Web App for Mgiftna Carwash & Lounge — combining an elite culinary lounge with a bespoke luxury car detailing boutique.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
