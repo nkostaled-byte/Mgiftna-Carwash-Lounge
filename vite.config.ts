@@ -4,6 +4,8 @@ import path from 'path';
 import {defineConfig} from 'vite';
 import { VitePWA } from 'vite-plugin-pwa';
 
+import { cloudflare } from "@cloudflare/vite-plugin";
+
 export default defineConfig(() => {
   return {
     plugins: [react(), tailwindcss(), VitePWA({
@@ -33,7 +35,7 @@ export default defineConfig(() => {
       workbox: {
         globPatterns: ['**/*.{js,css,html,png,jpg,svg}']
       }
-    })],
+    }), cloudflare()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
