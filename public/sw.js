@@ -30,10 +30,47 @@ self.addEventListener("activate", (event) => {
   );
 });
 
-// Fetch Event - network first with cache fallback
+// Fetch Event - network first with cache fallback, cache-first for images
 self.addEventListener("fetch", (event) => {
+  if (event.request.method !== "GET") {
+    return;
+  }
+
+  const url = new URL(event.request.url);
+  const isImage = 
+    event.request.destination === "image" ||
+    url.pathname.match(/\.(jpg|jpeg|png|gif|svg|webp|avif)/i) ||
+    url.hostname.includes("images.unsplash.com") ||
+    url.hostname.includes("res.cloudinary.com");
+
+  if (isImage) {
+    // Cache First Strategy for Images (both local and remote)
+    event.respondWith(
+      caches.open("mgiftanas-images-cache-v1").then((cache) => {
+        return cache.match(event.request).then((cachedResponse) => {
+          if (cachedResponse) {
+            // Return cached image instantly
+            return cachedResponse;
+          }
+          
+          // Fallback to network fetch, then cache the result
+          return fetch(event.request, { mode: "no-cors" }).then((networkResponse) => {
+            if (networkResponse && (networkResponse.status === 200 || networkResponse.status === 0)) {
+              cache.put(event.request, networkResponse.clone());
+            }
+            return networkResponse;
+          }).catch(() => {
+            // If offline and request failed, try checking default caches
+            return caches.match(event.request);
+          });
+        });
+      })
+    );
+    return;
+  }
+
   // Only cache GET requests and skip external API or chrome-extension protocols
-  if (event.request.method !== "GET" || !event.request.url.startsWith(self.location.origin)) {
+  if (!event.request.url.startsWith(self.location.origin)) {
     return;
   }
 

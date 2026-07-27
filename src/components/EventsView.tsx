@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Calendar, Clock, UserCheck, X, CheckCircle2, MapPin, Share2, Maximize2 } from "lucide-react";
 import { EVENT_ITEMS, EventItem } from "../data";
+import OptimizedImage from "./OptimizedImage";
 
 interface EventsViewProps {
   onNavigateToBook: (presetType: "dine" | "wash", selectedExperienceName?: string) => void;
@@ -122,15 +123,12 @@ export default function EventsView({ onNavigateToBook }: EventsViewProps) {
             >
               {/* Image Banner */}
               <div className="aspect-[16/10] w-full relative overflow-hidden">
-                <motion.img
+                <OptimizedImage
                   src={item.image}
                   alt={item.name}
                   className="w-full h-full object-cover object-top group-hover:scale-101 transition-transform duration-700"
-                  initial={{ scale: 1.05, opacity: 0 }}
-                  whileInView={{ scale: 1, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                  loading="lazy"
+                  isBelowFold={true}
+                  priority="low"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
@@ -218,7 +216,7 @@ export default function EventsView({ onNavigateToBook }: EventsViewProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 z-50 overflow-y-auto scrollbar-none"
+            className="fixed inset-0 bg-black/95 z-50 overflow-y-auto scrollbar-none pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
             style={{ scrollbarWidth: "none" }}
             id="event-detail-overlay"
           >
@@ -228,23 +226,25 @@ export default function EventsView({ onNavigateToBook }: EventsViewProps) {
                 setSelectedEvent(null);
                 setShowRsvpSuccess(false);
               }}
-              className="fixed top-4 right-4 z-50 bg-black/60 hover:bg-neutral-900 active:scale-95 text-white p-1.5 rounded-full backdrop-blur-md border border-white/10 transition-all duration-200"
+              className="fixed top-[calc(1rem+env(safe-area-inset-top))] right-[calc(1rem+env(safe-area-inset-right))] z-50 bg-black/60 hover:bg-neutral-900 active:scale-95 text-white w-11 h-11 flex items-center justify-center rounded-full backdrop-blur-md border border-white/10 transition-all duration-200 cursor-pointer"
               id="event-detail-close"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
 
             {/* Content Body */}
-            <div className="w-full max-w-lg mx-auto bg-[#0A0A0A] min-h-screen pb-24 relative" id="event-detail-content">
+            <div className="w-full max-w-lg mx-auto bg-[#0A0A0A] min-h-[100dvh] pb-[calc(4rem+env(safe-area-inset-bottom))] relative" id="event-detail-content">
               {/* Cinematic Cover Image */}
               <div 
                 className="relative h-[38vh] w-full bg-[#0A0A0A] cursor-pointer group"
                 onClick={() => setIsImageExpanded(true)}
               >
-                <img
+                <OptimizedImage
                   src={selectedEvent.image}
                   alt={selectedEvent.name}
                   className="w-full h-full object-contain object-top"
+                  isBelowFold={true}
+                  priority="low"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/35 pointer-events-none" />
@@ -425,22 +425,24 @@ export default function EventsView({ onNavigateToBook }: EventsViewProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4"
+            className="fixed inset-0 z-[100] bg-black/95 flex flex-col items-center justify-center p-4 pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
             onClick={() => setIsImageExpanded(false)}
             id="flyer-lightbox-overlay"
           >
             <button
               onClick={() => setIsImageExpanded(false)}
-              className="absolute top-5 right-5 bg-white/10 hover:bg-white/20 text-white p-2.5 rounded-full backdrop-blur-md transition-all z-10"
+              className="absolute top-[calc(1.25rem+env(safe-area-inset-top))] right-[calc(1.25rem+env(safe-area-inset-right))] bg-white/10 hover:bg-white/20 text-white w-11 h-11 flex items-center justify-center rounded-full backdrop-blur-md transition-all z-10 cursor-pointer"
               id="close-lightbox-btn"
             >
               <X className="w-5 h-5" />
             </button>
-            <div className="relative max-w-4xl w-full max-h-[85vh] flex items-center justify-center p-2" onClick={(e) => e.stopPropagation()}>
-              <img
+            <div className="relative max-w-4xl w-full max-h-[85dvh] flex items-center justify-center p-2" onClick={(e) => e.stopPropagation()}>
+              <OptimizedImage
                 src={selectedEvent.image}
                 alt={selectedEvent.name}
-                className="max-h-[80vh] max-w-full object-contain rounded-xl shadow-2xl border border-white/10"
+                className="max-h-[80dvh] max-w-full object-contain rounded-xl shadow-2xl border border-white/10"
+                isBelowFold={true}
+                priority="low"
                 referrerPolicy="no-referrer"
               />
             </div>

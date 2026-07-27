@@ -10,7 +10,7 @@ interface HeaderProps {
 export default function Header({ onNavigate, onOpenMenu }: HeaderProps) {
   return (
     <header
-      className="absolute top-0 left-0 right-0 z-40 bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#1A1A1A]/80 h-14 flex items-center justify-between px-4 transition-all duration-300 select-none"
+      className="absolute top-0 left-0 right-0 z-40 bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-[#1A1A1A]/80 h-[calc(3.5rem+env(safe-area-inset-top))] pt-[env(safe-area-inset-top)] flex items-center justify-between px-4 transition-all duration-300 select-none"
       id="app-header"
     >
       {/* Brand Section */}
@@ -25,6 +25,8 @@ export default function Header({ onNavigate, onOpenMenu }: HeaderProps) {
           alt="Mgiftana Logo"
           className="w-8 h-8 rounded-md object-cover"
           id="header-logo"
+          decoding="async"
+          fetchPriority="high"
         />
         
         {/* Brand Text */}

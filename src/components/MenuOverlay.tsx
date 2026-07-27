@@ -32,7 +32,7 @@ export default function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlay
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black/98 z-50 overflow-y-auto scrollbar-none flex flex-col justify-between p-6 pb-12 select-none"
+      className="fixed inset-0 bg-black/98 z-50 overflow-y-auto scrollbar-none flex flex-col justify-between pt-[calc(1.5rem+env(safe-area-inset-top))] pb-[calc(2rem+env(safe-area-inset-bottom))] pl-[calc(1.5rem+env(safe-area-inset-left))] pr-[calc(1.5rem+env(safe-area-inset-right))] select-none"
       style={{ scrollbarWidth: "none" }}
       id="menu-fullscreen-overlay"
     >
@@ -43,6 +43,9 @@ export default function MenuOverlay({ isOpen, onClose, onNavigate }: MenuOverlay
             src="https://res.cloudinary.com/dvvugpu04/image/upload/v1785159774/Mgiftnana_logo_uvjolg.png"
             alt="Mgiftana Logo"
             className="w-8 h-8 rounded-lg object-cover"
+            decoding="async"
+            loading="lazy"
+            fetchPriority="low"
           />
           <span className="text-xs font-black uppercase tracking-widest text-[#A3A3A3]">
             Mgiftana VIP Portal

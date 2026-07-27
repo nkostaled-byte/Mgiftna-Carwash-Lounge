@@ -320,6 +320,9 @@ export default function VisitView() {
                   src="https://res.cloudinary.com/dvvugpu04/image/upload/v1785159774/Mgiftnana_logo_uvjolg.png"
                   alt="Mgiftana Logo"
                   className="w-24 h-24 rounded-2xl object-cover relative z-10 border border-[#F59E0B]/30 shadow-2xl"
+                  decoding="async"
+                  loading="lazy"
+                  fetchPriority="low"
                 />
               </div>
 

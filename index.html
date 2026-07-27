@@ -9,6 +9,17 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Mgiftana's">
+    
+    <!-- Preconnect to image CDNs and Font providers to optimize handshake performance -->
+    <link rel="preconnect" href="https://res.cloudinary.com" crossorigin />
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin />
+    <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    
+    <!-- Preload critical brand logo with high fetchpriority -->
+    <link rel="preload" as="image" href="https://res.cloudinary.com/dvvugpu04/image/upload/v1785159774/Mgiftnana_logo_uvjolg.png" fetchpriority="high" />
+
     <!-- Premium Fontshare Fonts (Satoshi, General Sans, Cabinet Grotesk) -->
     <link href="https://api.fontshare.com/v2/css?f[]=satoshi@300,400,500,700,900&f[]=cabinet-grotesk@800&f[]=general-sans@400,500,600,700&display=swap" rel="stylesheet" />
     <!-- Google Fonts Fallbacks (Inter, Instrument Sans) -->

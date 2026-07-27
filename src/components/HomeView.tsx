@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { ArrowRight, Clock, Award } from "lucide-react";
 import { DINE_ITEMS, WASH_PACKAGES } from "../data";
 import { DineItem, WashPackage, ScreenType } from "../types";
+import OptimizedImage from "./OptimizedImage";
 
 interface HomeViewProps {
   onNavigate: (screen: ScreenType, presetType?: "dine" | "wash" | string) => void;
@@ -73,11 +74,12 @@ export default function HomeView({ onNavigate, onSelectItem, onSelectWash }: Hom
         >
           {/* Background Image with dark overlay */}
           <div className="absolute inset-0 bg-black/65 z-10 transition-colors group-hover:bg-black/55" />
-          <img
+          <OptimizedImage
             src="https://images.unsplash.com/photo-1543353071-10c8ba85a904?q=80&w=400&auto=format&fit=crop"
             alt="Lounge Dining"
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            loading="lazy"
+            isBelowFold={false}
+            priority="low"
             referrerPolicy="no-referrer"
           />
           {/* Content */}
@@ -111,11 +113,12 @@ export default function HomeView({ onNavigate, onSelectItem, onSelectWash }: Hom
         >
           {/* Background Image with dark overlay */}
           <div className="absolute inset-0 bg-black/65 z-10 transition-colors group-hover:bg-black/55" />
-          <img
+          <OptimizedImage
             src="https://res.cloudinary.com/dvvugpu04/image/upload/v1785164183/peeonelove-wash-5144821_moemys.jpg"
             alt="Car Detailing"
             className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-            loading="lazy"
+            isBelowFold={false}
+            priority="low"
             referrerPolicy="no-referrer"
           />
           {/* Content */}
@@ -158,15 +161,12 @@ export default function HomeView({ onNavigate, onSelectItem, onSelectWash }: Hom
           {/* Image */}
           <div className="aspect-[16/10] w-full relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-t from-[#111112] via-transparent to-black/20 z-10" />
-            <motion.img
+            <OptimizedImage
               src={featuredItem.image}
               alt={featuredItem.name}
               className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-              initial={{ scale: 1.05, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-              loading="lazy"
+              isBelowFold={true}
+              priority="low"
               referrerPolicy="no-referrer"
             />
             {/* Absolute Badges on Image */}
@@ -245,11 +245,12 @@ export default function HomeView({ onNavigate, onSelectItem, onSelectWash }: Hom
               id={`popular-item-${item.id}`}
             >
               <div className="w-[72px] h-[72px] rounded-lg overflow-hidden shrink-0 relative">
-                <img
+                <OptimizedImage
                   src={item.image}
                   alt={item.name}
                   className="w-full h-full object-cover"
-                  loading="lazy"
+                  isBelowFold={true}
+                  priority="low"
                   referrerPolicy="no-referrer"
                 />
               </div>

@@ -110,7 +110,7 @@ export default function App() {
       <DesktopLayout />
 
       {/* Untouched Mobile & Tablet Experience (Screens < 1024px) */}
-      <div className="lg:hidden min-h-screen w-full bg-[#030303] flex items-center justify-center py-0 md:py-10 selection:bg-amber-500/30 select-none">
+      <div className="lg:hidden min-h-[100dvh] w-full bg-[#030303] flex items-center justify-center py-0 md:py-10 selection:bg-amber-500/30 select-none">
         
         {/* 
           iPhone 16 Pro mockup on screen resolutions md and above.
@@ -118,7 +118,7 @@ export default function App() {
           while preserving native edge-to-edge layouts on mobile screens.
         */}
         <div 
-          className="relative w-full h-screen md:h-[860px] md:w-[395px] bg-[#0A0A0A] md:rounded-[52px] md:border-[10px] md:border-[#1E1E1E] md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col"
+          className="relative w-full h-[100dvh] md:h-[860px] md:w-[395px] bg-[#0A0A0A] md:rounded-[52px] md:border-[10px] md:border-[#1E1E1E] md:shadow-[0_25px_60px_-15px_rgba(0,0,0,0.9)] overflow-hidden flex flex-col"
           id="app-device-frame"
         >
           {/* Dynamic Island slot for simulator */}
@@ -134,7 +134,7 @@ export default function App() {
 
           {/* Scrollable Viewport Container */}
           <main
-            className="flex-1 overflow-y-auto overflow-x-hidden w-full pt-16 pb-[88px] scroll-smooth scrollbar-none"
+            className="flex-1 overflow-y-auto overflow-x-hidden w-full pt-[calc(4rem+env(safe-area-inset-top))] pb-[calc(88px+env(safe-area-inset-bottom))] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)] scroll-smooth scrollbar-none"
             style={{ scrollbarWidth: "none" }}
             id="pwa-scroll-viewport"
           >

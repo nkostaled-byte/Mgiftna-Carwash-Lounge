@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { X, Calendar, ChefHat, Leaf, Coins } from "lucide-react";
 import { DINE_ITEMS } from "../data";
 import { DineItem, DineCategory } from "../types";
+import OptimizedImage from "./OptimizedImage";
 
 interface DineViewProps {
   selectedItem: DineItem | null;
@@ -85,15 +86,12 @@ export default function DineView({ selectedItem, onSelectItem, onNavigateToBook 
           >
             {/* Image Wrap */}
             <div className="aspect-[16/10] w-full relative overflow-hidden">
-              <motion.img
+              <OptimizedImage
                 src={item.image}
                 alt={item.name}
                 className="w-full h-full object-cover group-hover:scale-102 transition-transform duration-700"
-                initial={{ scale: 1.05, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                loading="lazy"
+                isBelowFold={true}
+                priority="low"
                 referrerPolicy="no-referrer"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-black/10" />
@@ -140,27 +138,29 @@ export default function DineView({ selectedItem, onSelectItem, onNavigateToBook 
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black/95 z-50 overflow-y-auto scrollbar-none"
+            className="fixed inset-0 bg-black/95 z-50 overflow-y-auto scrollbar-none pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)] pl-[env(safe-area-inset-left)] pr-[env(safe-area-inset-right)]"
             style={{ scrollbarWidth: "none" }}
             id="dine-detail-overlay"
           >
             {/* Back Arrow button */}
             <button
               onClick={() => onSelectItem(null)}
-              className="fixed top-4 right-4 z-50 bg-black/60 hover:bg-neutral-900 active:scale-95 text-white p-1.5 rounded-full backdrop-blur-md border border-white/10 transition-all duration-200"
+              className="fixed top-[calc(1rem+env(safe-area-inset-top))] right-[calc(1rem+env(safe-area-inset-right))] z-50 bg-black/60 hover:bg-neutral-900 active:scale-95 text-white w-11 h-11 flex items-center justify-center rounded-full backdrop-blur-md border border-white/10 transition-all duration-200 cursor-pointer"
               id="dine-detail-close"
             >
-              <X className="w-4 h-4" />
+              <X className="w-5 h-5" />
             </button>
 
             {/* Immersive visual content */}
-            <div className="w-full max-w-lg mx-auto bg-[#0A0A0A] min-h-screen pb-24 relative" id="dine-detail-content">
+            <div className="w-full max-w-lg mx-auto bg-[#0A0A0A] min-h-[100dvh] pb-[calc(6rem+env(safe-area-inset-bottom))] relative" id="dine-detail-content">
               {/* Header Cinematic Banner */}
               <div className="relative h-[38vh] w-full">
-                <img
+                <OptimizedImage
                   src={selectedItem.image}
                   alt={selectedItem.name}
                   className="w-full h-full object-cover"
+                  isBelowFold={true}
+                  priority="low"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#0A0A0A] via-transparent to-black/30" />
@@ -248,7 +248,7 @@ export default function DineView({ selectedItem, onSelectItem, onNavigateToBook 
 
               {/* STICKY BOTTOM RESERVATION CTA */}
               <div 
-                className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black via-black to-black/90 border-t border-[#1F1F1F]/80 p-3 flex justify-center"
+                className="fixed bottom-0 left-0 right-0 z-40 bg-gradient-to-t from-black via-black to-black/90 border-t border-[#1F1F1F]/80 p-3 pb-[calc(12px+env(safe-area-inset-bottom))] flex justify-center"
                 id="dine-detail-sticky-cta"
               >
                 <div className="w-full max-w-md">
@@ -257,7 +257,7 @@ export default function DineView({ selectedItem, onSelectItem, onNavigateToBook 
                       onSelectItem(null);
                       onNavigateToBook("dine", selectedItem.name);
                     }}
-                    className="w-full bg-[#F59E0B] hover:bg-[#D97706] active:scale-[0.99] text-black font-extrabold py-2.5 rounded-xl uppercase tracking-wider text-xs shadow-md transition-all duration-200 flex items-center justify-center gap-2"
+                    className="w-full bg-[#F59E0B] hover:bg-[#D97706] active:scale-[0.99] text-black font-extrabold py-3.5 rounded-xl uppercase tracking-wider text-xs shadow-md transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer"
                     style={{ fontFamily: "'Satoshi', sans-serif" }}
                     id="dine-detail-book-table-btn"
                   >

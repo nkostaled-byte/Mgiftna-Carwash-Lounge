@@ -60,9 +60,16 @@ export const InstallPrompt = () => {
           initial={{ y: 100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           exit={{ y: 100, opacity: 0 }}
-          className="fixed bottom-4 left-4 right-4 z-50 bg-[#1A1A1A] border border-white/[0.1] p-4 rounded-2xl shadow-2xl flex items-center gap-4"
+          className="fixed bottom-[calc(5.5rem+env(safe-area-inset-bottom))] left-4 right-4 z-50 bg-[#1A1A1A] border border-white/[0.1] p-4 rounded-2xl shadow-2xl flex items-center gap-4"
         >
-          <img src="https://res.cloudinary.com/dvvugpu04/image/upload/v1785159774/Mgiftnana_logo_uvjolg.png" alt="Icon" className="w-12 h-12 rounded-xl" />
+          <img 
+            src="https://res.cloudinary.com/dvvugpu04/image/upload/v1785159774/Mgiftnana_logo_uvjolg.png" 
+            alt="Icon" 
+            className="w-12 h-12 rounded-xl" 
+            decoding="async"
+            loading="lazy"
+            fetchPriority="low"
+          />
           <div className="flex-1">
             <h4 className="text-white font-bold text-sm">Install Mgiftna</h4>
             <p className="text-neutral-400 text-xs">Enjoy a native app experience.</p>

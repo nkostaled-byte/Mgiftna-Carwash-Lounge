@@ -171,6 +171,8 @@ export default function DesktopLayout() {
                 alt="Mgiftna Logo" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                 referrerPolicy="no-referrer"
+                decoding="async"
+                fetchPriority="high"
               />
             </div>
             <div className="flex flex-col">
@@ -481,6 +483,9 @@ export default function DesktopLayout() {
                         alt={DINE_CATEGORY_DETAILS[selectedDineCategory]?.title || DINE_CATEGORY_DETAILS.all.title}
                         className="w-full h-full object-cover filter brightness-[0.65] contrast-[1.05] transition-transform duration-[1200ms] hover:scale-105"
                         referrerPolicy="no-referrer"
+                        decoding="async"
+                        loading="lazy"
+                        fetchPriority="low"
                       />
                     </motion.div>
                   </AnimatePresence>
@@ -1213,6 +1218,9 @@ export default function DesktopLayout() {
                   alt={selectedDineItem.name} 
                   className="w-full h-full object-cover filter brightness-[0.8]"
                   referrerPolicy="no-referrer"
+                  decoding="async"
+                  loading="lazy"
+                  fetchPriority="low"
                 />
               </div>
 
@@ -1289,6 +1297,9 @@ export default function DesktopLayout() {
                   alt={selectedWashPkg.name} 
                   className="w-full h-full object-cover filter brightness-[0.8]"
                   referrerPolicy="no-referrer"
+                  decoding="async"
+                  loading="lazy"
+                  fetchPriority="low"
                 />
               </div>
 

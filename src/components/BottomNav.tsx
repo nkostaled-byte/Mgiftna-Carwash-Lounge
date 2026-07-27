@@ -20,7 +20,7 @@ export default function BottomNav({ currentScreen, onNavigate }: BottomNavProps)
 
   return (
     <div
-      className="absolute bottom-5 left-1/2 -translate-x-1/2 w-[92%] max-w-[370px] z-40 select-none"
+      className="absolute bottom-[calc(1.25rem+env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 w-[92%] max-w-[370px] z-40 select-none"
       id="app-bottom-nav-container"
     >
       <div 
